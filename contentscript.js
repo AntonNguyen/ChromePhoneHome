@@ -91,6 +91,7 @@ function randomEmptyMesssage() {
 
 function resetExtensions() {
 	$('#extensions tr').show();
+	$('#searchResultMessage').hide();	
 }
 
 function removeWhitespace(value) {
