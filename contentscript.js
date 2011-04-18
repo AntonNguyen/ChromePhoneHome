@@ -1,11 +1,15 @@
 extensions = [];
 
 $(document).ready(function() {
-		
+	
+	// Get the first table
+	var extensionTableElement = $('table.confluenceTable:first');
+	
 	// Populate the list of names/extensions
-	$('#extensions tr').each(function() {
+	$('tr', extensionTableElement).each(function() {
 		var raw_name = removeWhitespace($("td:first-child", this).text());
 		var raw_ext = removeWhitespace($("td:last-child", this).text());
+		
 		extensions[extensions.length] =
 			{
 				name: raw_name,
@@ -17,19 +21,20 @@ $(document).ready(function() {
 	});	
 	
 	//Add our search box and focus on it
-	$('#extensions').before('<strong>Fresh Search: </strong><input id="extSearch" type="text" size="50"/><br/>');
+	extensionTableElement.before('<strong>Fresh Search: </strong><input id="extSearch" type="text" size="50"/><br/>');
 	$('#extSearch').focus();
-	
-	$('#extensions').after('<div id="searchResultMessage" style="padding:10px;color:red;font-weight:bold"/>');
+	$('#extSearch').after('<div id="searchResultMessage" style="padding:10px;color:red;font-weight:bold"/>');
 	$('#searchResultMessage').hide();
 	
 	$('#extSearch').keyup(function(event) {
 		
 		var searchTerm = removeWhitespace($('#extSearch').val());
+		console.log(searchTerm);
 		
 		if (searchTerm != "") {
 			searchExtensions(searchTerm);
 		} else {
+			console.log('Reset')
 			resetExtensions();
 		}
 		
@@ -90,7 +95,9 @@ function randomEmptyMesssage() {
 }
 
 function resetExtensions() {
-	$('#extensions tr').show();
+	for (var i = 0; i < extensions.length; i++) {
+		extensions[i].ref.show();
+	}
 	$('#searchResultMessage').hide();	
 }
 
