@@ -1,7 +1,7 @@
 {
   "name" : "FreshBuddy Finder",
   "description" : "Adds Insta-Search to the Extension Page on the Wiki",
-  "version" : "1.0",
+  "version" : "1.1",
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
